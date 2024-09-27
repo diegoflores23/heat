@@ -1,0 +1,17 @@
+---
+title: "Indoor Heat and Occupation"
+author: "Diego Flores"
+format: html
+---
+
+# Introduction
+::: {layout="[[20,20]]"}
+
+<img src="images/socalcoshlogo.jpg" style="width: 35%;" />
+<img src="images/uclalosh.jpg" style="width: 35%;" />
+
+:::
+
+This research project is carried out in collaboration between UCLA's Labor Occupational Safety and Health (LOSH) program and the Southern California Coalition for Occupational Safety & Health (SoCalCOSH). This project seeks to uncover the realities and impacts of indoor heat on workers in Southern California using a mixed-methods approach. Through worker interviews paired with data analysis...
+
+With the onset of climate change, the planet continues to grow hotter and hotter. Heat impacts all facets of life, especially one's working conditions. While some of the impacts of climate change may be irreversible, there are policies in place to curb the impact of heat in the workplace. California's Title 8 regulation, more commonly known as the [Indoor Heat Standard](https://www.dir.ca.gov/dosh/HeatIllnessInfo.html), protects all indoor workers, regardless of occupation, from indoor heat exceeding 82° and/ or 87°. 

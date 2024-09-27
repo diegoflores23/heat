@@ -1,0 +1,47 @@
+---
+title: "Notes"
+format: html
+editor: visual
+---
+
+<div>
+
+Bootswatch project themes: journal, lux, sandstone, slate, solar
+
+</div>
+
+------------------------------------------------------------------------
+
+**Data Sources**
+
+Emergency department encounters: various available but Pivot profiles includes all ED data files and inpatient discharge data file (for admissions originating in the emergency department) aggregated at the hospital level. number of visits, expected payer, discharge disposition, age groups, sex, preferred language spoken, race groups, principal diagnosis groups, and principal external cause of injury/morbidity groups.
+
+[quarto tips and tricks](https://www.productive-r-workflow.com/quarto-tricks#toc) - has a ton of good tips, footnotes, iframe, tabs, etc
+
+[quarto bookdown](https://quarto.org/docs/authoring/figures.html) - quarto documentation
+
+-   under HTML theming: once theme is chosen, can customize the theme presets such as font family (serif, georgia etc), base font size, background color, linestretch (distance between lines of text, defaults to 1.5)
+
+[rmd bookdown](https://bookdown.org/yihui/rmarkdown/html-document.html)
+
+{r, echo = FALSE, out.width = "45"} knitr::include_graphics(c("images/socalcoshlogo.jpg", "images/uclalosh.png")) \#![](images/socalcoshlogo.jpg){fig-align="left" width="233"}
+
+**Figure Divs**
+
+You can treat any markdown content you want as a figure by enclosing it in Pandoc div block with an identifier prefaced with #fig-. For example, here we create a figure that includes an embedded iframe:
+
+::: {#fig-elephant}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SNggmeilXDQ">
+
+</iframe>
+
+Elephant
+:::
+
+Note that the last paragraph in the div block is used as the figure caption.
+
+Note on Images:
+
+well the only way I was able to get the images side by side was by the current
+
+[Making your Rmd fancy:](https://rstudio4edu.github.io/rstudio4edu-book/rmd-fancy.html) Adding a big image to the front of the page with the title also present is called a hero image

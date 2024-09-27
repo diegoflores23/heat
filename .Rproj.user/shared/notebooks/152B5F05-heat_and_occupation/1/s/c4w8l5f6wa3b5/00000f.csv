@@ -1,0 +1,8 @@
+"0","#create map widget, initial layer "
+"0","m <- leaflet(data = ffood_geoloc) %>% "
+"0","  addTiles()"
+"0","m %>% addCircleMarkers("
+"0","  ~lng, ~lat, # ~ calls the columns from df above, positions markers on map"
+"0","  label = ~paste(name, address), "
+"0","  radius = 3"
+"0",")"

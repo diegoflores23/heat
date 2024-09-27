@@ -1,0 +1,4 @@
+/* Adjust page width */
+.container {
+    max-width: 90% !important;  /* Increase to 90% width of the browser window */
+}

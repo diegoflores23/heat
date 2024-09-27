@@ -1,0 +1,8 @@
+"0","lac_naics24 <- lac_naics4 %>%
+  rename(fips = area_fips, 
+         naics = industry_code) %>% 
+  filter(naics %in% c(""811192"", ""315"",   # %>%, filter for NAICS obsvr that r in this vector
+                      ""493110"", ""722513""))
+"
+"2","Error: object 'lac_naics4' not found
+"

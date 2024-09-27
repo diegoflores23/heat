@@ -1,0 +1,4 @@
+"0","industries_filter <- industries %>% "
+"0","  filter(county == ""San Bernardino County"")"
+"0","p3 <- ggplot(data = industries_filter, aes(x = industry,y = annual_avg_estabs, fill = industry)) + geom_bar(stat = ""identity"", position = ""dodge"", width = 0.5) + labs(title = ""Industry Total in San Bernardino County (2023)"", y = ""Annual Average Establishments"", x = ""Industry"", caption = ""Source: Buruea of Labor Statistics Quarterly Census on Employment and Wages"" ) "
+"0","p3 + theme_linedraw() +theme(axis.text.x = element_text(angle = -370, hjust = 0))+ coord_cartesian(ylim = c(0,750))"

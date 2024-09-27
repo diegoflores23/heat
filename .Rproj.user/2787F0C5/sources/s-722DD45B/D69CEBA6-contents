@@ -1,0 +1,17 @@
+name: "Heat and Occupation Research"
+output_dir: "docs"
+navbar:
+  title: ""
+  left: 
+    - text: "Home"
+      href: index.html
+    - text: "Heat and Occupation"
+      href: heat_and_occupation.html
+    - text: "About"
+      href: about.html
+    - text: "Resources"
+      href: resources.html
+output: 
+  html_document:
+    theme: cosmo
+    

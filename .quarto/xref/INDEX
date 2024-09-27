@@ -1,0 +1,26 @@
+{
+  "about.qmd": {
+    "about.html": "8b6bbcf8"
+  },
+  "indextest.qmd": {
+    "indextest.html": "d5ffe032"
+  },
+  "heat and occupation.Rmd": {
+    "heat and occupation.html": "972ccbf4"
+  },
+  "heat_and_occupation.qmd": {
+    "heat_and_occupation.html": "3e0fe949"
+  },
+  "resources.qmd": {
+    "resources.html": "fef35f75"
+  },
+  "index.qmd": {
+    "index.html": "614e322a"
+  },
+  "methods.qmd": {
+    "methods.html": "f8210f0b"
+  },
+  "Notes.qmd": {
+    "Notes.html": "6ecd70ad"
+  }
+}

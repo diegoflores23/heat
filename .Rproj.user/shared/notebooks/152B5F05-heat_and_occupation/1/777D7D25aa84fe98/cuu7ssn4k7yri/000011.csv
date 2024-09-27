@@ -1,0 +1,5 @@
+"0","industries24 <- select(-c(3, 6:7, 10))
+"
+"2","Error in UseMethod(""select"") : 
+  no applicable method for 'select' applied to an object of class ""c('double', 'numeric')""
+"

@@ -1,0 +1,9 @@
+"0","#str(industries24)"
+"0","industries24 %>% "
+"0","  select(-c(fips, naics)) %>% "
+"0","  dfSummary("
+"0","    graph.col = TRUE, style = ""grid"", "
+"0","    graph.magnif = 0.75"
+"0","  ) %>% stview()"
+"2","Output file written: /var/folders/dc/92b4rct96931sct_xtgblqv00000gn/T//RtmpddknOw/file287a5de94dfc.html
+"

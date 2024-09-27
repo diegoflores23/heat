@@ -1,0 +1,7 @@
+"0","ffood <- qcewGetIndustryData(""2023"", ""a"", ""722513"")"
+"0","lac_ff <- ffood %>% "
+"0","  rename(fips = area_fips) %>% "
+"0","  filter(fips == ""06037"") "
+"2","Error in ffood %>% rename(fips = area_fips) %>% filter(fips == ""06037"") : 
+  could not find function ""%>%""
+"

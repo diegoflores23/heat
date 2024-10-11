@@ -1,8 +1,0 @@
-"0","#DESCRIPTIVE STATS "
-"0","p <- ggplot(data = industries, aes(x = industry, y = annual_avg_estabs, fill = county)) "
-"0","p1 <- p + geom_bar(stat = ""identity"", position = ""dodge"") + labs(title = ""Total Industry Establishments by County (2023)"", "
-"0","       y = ""Annual Average Establishments"","
-"0","       x = ""Industry"","
-"0","       caption = ""Source: Buruea of Labor Statistics Quarterly Census on Employment and Wages"" ) "
-"0","p1 <- p1 + theme_linedraw() + theme(axis.text.x = element_text(angle = 15, hjust = 1))"
-"0","# p1 + theme_fivethirtyeight()"

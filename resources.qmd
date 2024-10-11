@@ -20,3 +20,8 @@ Below is a list of resources related to California's Indoor Heat Illness prevent
 [LA Black Workers Center](https://lablackworkercenter.org)
 
 [Inland Empire Amazon Workers United](https://www.ieamazonworkers.org)
+
+```{r}
+install.packages("IFrame")
+library(IFrame)
+```

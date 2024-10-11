@@ -13,5 +13,5 @@ navbar:
       href: resources.html
 output: 
   html_document:
-    theme: cosmo
+    theme: sandstone
     

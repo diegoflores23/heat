@@ -12,9 +12,116 @@ Bootswatch project themes: journal, lux, sandstone, slate, solar
 
 ------------------------------------------------------------------------
 
-**Data Sources**
+# **Data Sources**
 
-Emergency department encounters: various available but Pivot profiles includes all ED data files and inpatient discharge data file (for admissions originating in the emergency department) aggregated at the hospital level. number of visits, expected payer, discharge disposition, age groups, sex, preferred language spoken, race groups, principal diagnosis groups, and principal external cause of injury/morbidity groups.
+### **Data general (cont.)**
+
+-   Emergency department encounters: various available but Pivot profiles includes all ED data files and inpatient discharge data file (for admissions originating in the emergency department) aggregated at the hospital level. number of visits, expected payer, discharge disposition, age groups, sex, preferred language spoken, race groups, principal diagnosis groups, and principal external cause of injury/morbidity groups. – find source link
+
+-   CDC heat and Health Index ([HHI](https://ephtracking.cdc.gov/Applications/heatTracker/)) this can be joined with labor occupation data from BLS or ACS to find the percentage of warehouse/ logistics workers and other industries that may be disproportionately impacted by indoor heat 
+
+    -   “(HHI) incorporates historical temperature, heat-related illness, and community characteristics data at the ZIP code level” – need to add occupation to this data
+
+-   [CDC Heat/ health tracke](https://ephtracking.cdc.gov/Applications/heatTracker/)r: daily heat related illness: daily ED visits due to heat related illness per 100k – further disaggregated by sex and age– **we have the opportunity to disaggregate by occupation and race**
+
+    -   Source: National Syndromic Surveillance Program ([NSSP](https://www.cdc.gov/nssp/index.html))
+
+-   [US EPA Heat related workplace deaths](https://www.epa.gov/climate-indicators/closer-look-heat-related-workplace-deaths#ref5): 2 categories construction and all other sectors 
+
+    -   construction occupation comprised a large share of deaths relative to all other sectors 
+
+    -   1992 -2022, “334 construction workers lost their lives to heat exposure on the job—meaning that the construction sector accounted for about 34 percent of all occupational heat-related deaths (see Figure 1).”
+
+-   [Minnesota dept. Public health](https://data.web.health.state.mn.us/heat_ed): straight forward heat related emergency department (ED) visits 
+
+    -   Typical example of the limits of analyzing heat: only go as far to dissagregate by sex and age
+
+#### Data Source IV: webscraping OSHA establishment searches
+
+```         
+```
+
+**Methods Q:** webscrape search by industry, or do a broad establishment search? I think broad establishment search of all of So Cal or all of california? then subset by all these zip codes? Or start by zip code (one by one) that ultimately encompasses area of interest.
+
+-   by region: Region 3 – Santa Ana Regional Office, Region 4 – Monrovia Regional Office
+
+1.  Industry specific search: search by naics, all else is relatively the same
+
+2.  The Establishments Search results page- will do establishment search
+
+    Searching/ identifying material on any of these bases/ extractable things
+
+-   Activity - Provides a unique identifier for the inspection. By clicking this link, specific information for this inspection will be displayed.
+
+-   Opened - the date the inspection was started.
+
+-   RID - Identifies the OSHA office or organizational unit responsible for the inspection.
+
+-   St - Indicates the state postal abbreviation of the inspection site.
+
+-   Type - Indicates the impetus for actually performing the inspection; e.g., may be part of a planned schedule, accident, complaint, etc.
+
+-   Sc - Indicates whether a complete, partial or records only inspection was performed; may also indicate no inspection if for some reason the inspection could not take place.
+
+-   SIC - Indicates the 4-digit Standard Industrial Classification Code from the 1987 version SIC manual which most closely applies. By clicking on this link, the SIC description is displayed.
+
+-   Vio - Indicates the number of OSHA standards which were cited.
+
+-   Establishment Name - Identifies the establishment that was inspected.
+
+Searches may be sorted by Date, Name, Office, or State. Searches are sorted by date in descending order by default. Clicking on Date will sort on the date in ascending order. Clicking the check box next to the search result and clicking the Get Detail button will display the inspection details for each inspection. If more than 20 results are returned, click on the arrow next to the Result Page text to navigate to the other search results. To return to the search page to perform another search, click on the Return to Search link.
+
+#### **Data/ fact source 5:**
+
+out there: [injury tracking application.](https://www.osha.gov/injuryreporting): look for heat related injuries
+
+#### **Data Source I (cont): Quarterly Census of Employment and Wages QCEW**
+
+-   Purpose: quarterly count of employment and wages by county, MSA, state, etc, by AREA and **NAICS (industry)**. 
+
+-   **CALCULATIONS:**
+
+    -   \% change in employment: (Growth) (warehouse/ logistics, carwash, fast food/ service)
+
+    -   Warehouse: all other sectors ratio 
+
+    -    county level, zoom into city level e.g.: SB county, San bernardino city, Vernon, Commerce… 
+
+-   Annual vs quarterly? Whats the difference? Not sure 
+
+**EPA**: Regarding [A Closer Look: Heat-Related Workplace Deaths](https://www.epa.gov/climate-indicators/closer-look-heat-related-workplace-deaths#ref7)
+
+-    “Data for this feature were provided by BLS. The data in Figure 1 are publicly available on the BLS Injuries, Illnesses, and Fatalities website at: [www.bls.gov/iif/home.htm](http://www.bls.gov/iif/home.htm). Data for the outdoor workers map figure came from BLS’s Quarterly Census of Employment and Wages: [www.bls.gov/cew/downloadable-data-files.htm](http://www.bls.gov/cew/downloadable-data-files.htm).”
+
+**QCEW data structure(cont.)**
+
+-   QCEW CSV files sliced by industry, area, and establishment size-class. 
+
+    -   industry slice: all  records associated w/ the industry for a single time period. 
+
+    -   area slice: all the records associated w/ the area for a single time period. 
+
+    -   size slice: all records published w/ in a specific size class for the 1st Q of specified year.
+
+-   QCEW: can I find NAICS carwash/ warehouses – probably available, the feature from the [EPA](https://www.epa.gov/climate-indicators/closer-look-heat-related-workplace-deaths#ref5) uses data from here to map the density of outdoor workers by county
+
+**Concretizing / Data Viz ideas**
+
+-   Mapping heat/ temperatures and carwash/ warehouse density in a given zipcode, merge CDC heat and health index (see above). maybe just need average temperatures instead of an heat and health index
+
+-   Common identifier: zipcode, NAICS, geospaital point? Coordinate? 
+
+#### **Data source II: Injuries, Illnesses, and Fatalities [database](https://www.bls.gov/iif/data.htm)**
+
+-   Source: Census of Fatal Occupational Injuries (CFOI) gathered by BLS is available at <https://www.bls.gov/iif/data.htm> 
+
+    -   Article Source: Acloser look– [EPA Heat related workplace deaths ](https://www.epa.gov/climate-indicators/closer-look-heat-related-workplace-deaths#ref7)
+
+-   Source: **Occupational Injuries and Illnesses by industry data available there\^**
+
+#### **Data Source III**
+
+-   Possible source for location of warehouses see bookmarks bar, rocket mortgage
 
 [quarto tips and tricks](https://www.productive-r-workflow.com/quarto-tricks#toc) - has a ton of good tips, footnotes, iframe, tabs, etc
 
@@ -45,3 +152,15 @@ Note on Images:
 well the only way I was able to get the images side by side was by the current
 
 [Making your Rmd fancy:](https://rstudio4edu.github.io/rstudio4edu-book/rmd-fancy.html) Adding a big image to the front of the page with the title also present is called a hero image
+
+**Bookdown books**
+
+[hands on data visualization](https://handsondataviz.org/organization.html) - Jack dougherty - **not an R book**
+
+-   all about data viz and commmunicating social sci data effectively
+
+-   geospatial data
+
+-   chart.js/ highchart good templates
+
+-   also geospatial is his book [On The Line](https://ontheline.trincoll.edu)

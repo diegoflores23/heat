@@ -1,0 +1,11 @@
+---
+title: "About"
+format: html
+editor: visual
+---
+
+This research project aims to amplify workers' voices and experiences with indoor heat—often extreme heat—to better understand its impact on health, safety, working conditions, and the overall worker. In the context of California's recent Indoor Heat Illness Standard, *passed June 2024 and in effect as of July 23rd, 2024*, a plethora of worker advocacy organizations, labor unions, and collectives are taking the necessary action to inform, train, and empower their workers as it relates to indoor heat. This research website forms a part of that broader push to empower workers in the face of new and, initially, ambiguous understandings of California's indoor heat protections. It is our hope this website serves as both an advocacy tool to inform workers and organizations and a push to bridge data analysis and original labor research.
+
+**Carried out in partnership with:**
+
+[SoCalCOSH](https://www.socalcosh.com) & [UCLA Labor Occupational Saftey and Health Program](https://losh.ucla.edu)

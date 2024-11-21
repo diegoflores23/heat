@@ -1,0 +1,549 @@
+---
+title: "CALOSHA establishment search web scrape"
+editor: visual
+---
+
+## Notes for webscraping
+
+**for webscraping:**
+
+***rvest*** if it works well for static site scrapping and also web browser control (with `read_html_live()`): <https://rvest.tidyverse.org/> dev. by wickham
+
+-   **Pagination**: See his github rvest [here](https://github.com/hadley/web-scraping/blob/main/pagination.R), uses httr to scrape multiple pages
+
+Hayalbaz if you need more interaction : <https://github.com/rundel/hayalbaz>
+
+A nice playlist on how to use rvest by data slice: <https://youtube.com/playlist?list=PLr5uaPu5L7xLEclrT0-2TWAz5FTkfdUiW&si=FWa02M1Qq7uLBMDB>
+
+**to read pdf content:**
+
+readtext (wrap pdftools and more): <https://github.com/quanteda/readtext>
+
+pdftools: <https://cran.r-project.org/web/packages/pdftools/index.html>
+
+Criminologist jail/ prison extraction data using pdftools package:
+
+Since other packages to extract tables from pdf have maintenance or dependency issues (with java) here is a tutorial using pdftools (a bit long): <https://crimebythenumbers.com/scrape-table.html>
+
+For more complex sites, you might need to deal with JavaScript-rendered content. In such cases, `RSelenium` is a great tool. It allows you to automate a web browser, interact with dynamic content, and scrape data that isn’t readily available in the static HTML.
+
+**To scrape:**
+
+-   webscrape CALOSHA website (not really up to date) on [complaints received and citations issued](https://www.dir.ca.gov/dosh/statistics/Complaints-and-citations.html)
+
+#### **Calosha inspection details notes**
+
+1.  order: close pop up (if needed)\> establishment search (California, monrovia office, case status: all, violation status: With Violations), date, press search \> Click **Activity** \>**Inspection Nr**: 1760736.015, **Report ID:** 0950644, **Date Opened:** 06/13/2024, **Site Address, Union Status, NAICS, Mailing Address,** **Inspection Type, Scope, Advanced Notice, Ownership, Safety/Health, Close** **Conference**, **Emphasis**, **Case** **Closed**,
+2.  Locate **violation** **summary**: Current Violations - Total, Current Penalty - Total
+3.  Locate **Violation** **Items**: Get **Standard** **Cited** only if it is 3395? or get all standards cited, regardless retrieve **Standard** **cited**, **Issuance** **Date**, **Abatement** **Due** **Date**, **current** **penalty**
+
+-   **Inspection type:** there are two types– programmed and unprogrammed,
+
+    -   A Fatality/Catastrophe Report (FAT/CAT),
+
+    -   Complaint
+
+    -   Accident
+
+**notes from lex (osha rep):**
+
+In the case you referenced below, there are indicators of what type of inspection: Accident and Complaint Inspections are” Unprogrammed Inspections:” and in most cases are also “Partial” Inspections (focused on the specific accident or the complaint item, although some complaints could be “Comprehensive”).
+
+Inspection Type: Complaint
+
+Scope: Partial
+
+Advanced Notice: N
+
+Ownership: Private
+
+Safety/Health: Health
+
+Close Conference: 12/15/2023
+
+Emphasis:
+
+Case Closed: 01/30/2024
+
+Programmed inspections, like those conducted by my office will always be “Comprehensive”. IN all cases, there is never an announcement of a pending inspection. Notice is never given to any employer, by law in Cal OSHA
+
+Data analysis:
+
+-   see which industries are most cited
+
+-   What percent of complaints actually result in violations? This is 5 year range 1059/ 1706 – 62%
+
+```{r}
+knitr::opts_chunk$set(eval = FALSE)
+#install.packages("rvest") 
+#install.packages("pdftools")
+#install.packages("xml2")
+#install.packages("RSelenium")
+#install.packages("binman")
+# install.packages("purrr")
+library(purrr)
+library(pdftools)
+library(rvest)
+library(httr)
+library(xml2)
+library(tibble)
+library(RSelenium)
+library(wdman)
+library(binman)
+library(dplyr)
+```
+
+```{r, eval = FALSE}
+#FAILED - server request 403 
+#url <- "https://www.osha.gov/ords/imis/establishment.search?p_logger=1&establishment=&State=CA&officetype=all&Office=950644&sitezip=&p_case=all&p_violations_exist=all&startmonth=09&startday=30&startyear=2019&endmonth=09&endday=30&endyear=2024"
+# set user agent 
+
+#response <- GET(url, 
+                user_agent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36"))
+
+# Check if the request was successful
+#if (status_code(response) == 200) {
+  # Parse the content of the webpage
+  #webpage <- read_html(content(response, "text"))
+  
+  # Extract the first table from the page
+ # table <- webpage %>% 
+   # html_nodes("table") %>%     # Find all tables on the page
+  #  .[[1]] %>%                  # Select the first table (adjust index if needed)
+   # html_table(fill = TRUE)      # Convert HTML table to data frame
+  
+  # Print the table
+  #print(table)
+  
+#} else {
+  stop("Failed to retrieve the webpage. Status code: ", status_code(response))
+#}
+```
+
+```{r chrome_scrape, eval = FALSE}
+#FAILED - not recgonzing referer, user agent issues 
+# Define the URL
+# Load required libraries
+
+# Define the URL
+url <- "https://www.osha.gov/ords/imis/establishment.search?p_logger=1&establishment=&State=CA&officetype=all&Office=950644&sitezip=&p_case=all&p_violations_exist=all&startmonth=09&startday=30&startyear=2019&endmonth=09&endday=30&endyear=2024"
+
+# Set HTTP headers to mimic a real browser
+# adding more user agent headers, simulate real users 
+response <- GET(url, 
+                user_agent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36"),
+                add_headers(.  
+                  `Referer` = "https://www.google.com",
+                  `Accept-Language` = "en-US,en;q=0.9",
+                  `Cache-Control` = "max-age=0"
+                ))
+
+# Check if the request was successful
+if (status_code(response) == 200) {
+  # Parse the content of the webpage
+  webpage <- read_html(content(response, "text"))
+  
+  # Extract the first table from the page
+  table <- webpage %>% 
+    html_nodes("table") %>%     # Find all tables on the page
+    .[[1]] %>%                  # Select the first table (adjust index if needed)
+    html_table(fill = TRUE)      # Convert HTML table to data frame
+  
+  # Print the table
+  print(table)
+  
+} else {
+  stop("Failed to retrieve the webpage. Status code: ", status_code(response))
+}
+```
+
+Attempt II. rvest xml2 and tibbles
+
+```{r rvest1, eval=FALSE}
+#store url 
+url2 <- "https://www.osha.gov/ords/imis/establishment.search?p_logger=1&establishment=&State=CA&officetype=all&Office=950644&sitezip=&p_case=all&p_violations_exist=all&startmonth=09&startday=30&startyear=2019&endmonth=09&endday=30&endyear=2024"
+#scrape htmlinfo from stored url 
+base_webpage <- read_html(url2)
+#loop 
+new_url2 <- "https://www.osha.gov/ords/imis/establishment.search?p_logger=1&establishment=&State=CA&officetype=all&Office=950644&sitezip=&p_case=all&p_violations_exist=all&startmonth=09&startday=30&startyear=2019&endmonth=09&endday=30&endyear=2024/%s"
+# Creating dataframe of the first 100 movies:
+# html_table() converts html tables into dataframes.
+table_base <- rvest::html_table(base_webpage) [[1]] %>% 
+  tibble::as_tibble(.name_repair = "unique")
+table_new <- data.frame()
+df <- data.frame()
+i <- 101
+
+## Creating data out of the next set of tables 
+while (i<5502) {
+  new_webpage<- read_html(sprintf(new_url2,i))
+  table_new <- rvest::html_table(new_webpage)[[1]] %>% 
+    tibble::as_tibble(.name_repair = "unique") # repair the repeated columns
+  df<- rbind(df,table_new)
+  i=i+100
+}
+## Merge table_base and df 
+citations <- merge(table_base, df, all = T)
+head(citations)
+```
+
+#### Attempt III. Rselenium
+
+sites generate dynamic content w/ JavaScript so the raw html of site doesnt help much. [Rblogger](https://www.r-bloggers.com/2014/12/scraping-with-selenium/#google_vignette) tutorial (2014) outdated, using appsilon tutorial
+
+-   latest chromedriver version installed: 129.0.6668.89, somehow my R cannot access it it conitnues to access an older version of it 106. tried everything, I manually installed driver 129 for browser and driver compatibility.
+
+-   I dwonloaded driver 129 [here](https://googlechromelabs.github.io/chrome-for-testing/)
+
+Chrome attempt didnt work. chrome driver incompatibility, saved by firefox
+
+```{r selenium_chrome, eval = FALSE}
+#NOT WORKING
+#rD <- RSelenium::rsDriver() #only supports v.106, have v.129
+# check supported chrome versions. 
+binman::list_versions(appname = "chromedriver")
+rD <- RSelenium::rsDriver(browser = "chrome", 
+                          port = 53924L, chromever = "129.0.6668.89") 
+#troubleshooting below 
+# Define the path to your ChromeDriver
+chrome_driver_path <- "/Users/diegoflores/Downloads/chromedriver-mac-arm64-2/chromedriver"
+
+# Start RSelenium with the path to the driver
+rD <- rsDriver(browser = "chrome", chromever = "129.0.6668.89", extraCapabilities = list(chromeOptions = list(binary = chrome_driver_path)))
+binman::list_versions(appname = "chromedriver")
+
+rD <- RSelenium::rsDriver(browser = "chrome",
+                          chromever = "106.0.5249.21")
+```
+
+**Working with elements**
+
+-   `findElement(using, value)`: Search for an element on the page, starting from the document root. The located element will be returned as an object of webElement class. To use this need some basic knowledge of HTML/ CSS (or xpath, etc). Chrome extension, called [**SelectorGadget**](https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb?hl=es), might help.
+
+-   `highlightElement()`: Utility function to highlight current Element. This helps to check that you selected the wanted element.
+
+-   `sendKeysToElement()`: Send a sequence of keystrokes to an element. The keystrokes are sent as a list. Plain text is entered as an unnamed element of the list. Keyboard entries are defined in ‘selKeys‘ and should be listed with the name ‘key‘.
+
+-   `clearElement()`: Clear a TEXTAREA or text INPUT element’s value.
+
+-   `clickElement()`: Click the element. You can click links, check boxes, dropdown lists, etc.
+
+-   LATEST UPDATE:
+
+    -   succesful but the table output isnt that nice I need to first get the top header (whihc has the variables names) am I analyzing by column or row or both, or how do I think about the scrape?
+
+    -   I think I successfully extracted all of the first table? now I need to loop it!! figure out pagination
+
+```{r selenium_ffox}
+rD <- RSelenium::rsDriver(browser = "firefox", port = 4569L) # start session
+remDr <- rD[["client"]] # Assign the client to an object
+```
+
+```{r ffox_navigate}
+remDr$open()
+base_url <- "https://www.osha.gov/ords/imis/establishment.search?p_logger=1&establishment=&State=CA&officetype=all&Office=950644&sitezip=&p_case=all&p_violations_exist=yes&startmonth=10&startday=14&startyear=2019&endmonth=10&endday=14&endyear=2024" 
+
+remDr$navigate(base_url)
+# Sys.sleep(4) # seconds
+
+#webElem <- remDr$findElement(using = "css selector", value = "div.table-responsive:nth-child(8) > table:nth-child(1)") 
+# webElem$highlightElement()
+remDr$maxWindowSize()
+#keep the browser active, open(silent = FALSE)
+#remDr$open() #use this if server is already active
+#remDr$close() #close current session 
+```
+
+```{r ffox_initial_table_scrape}
+source <- remDr$getPageSource()[[1]]# read page source from where you navigated 
+# get all rows of table in an xml list 
+table_body  <- read_html(source) %>% #table_body is xml list 
+  html_nodes("div.table-responsive:nth-child(8) > table:nth-child(1) > tbody:nth-child(2)")
+
+print(table_body)
+ #Extract all data from rows in the table
+table_data <- table_body %>% # then table body is passed to html_nodes to extract the actual data
+  html_nodes("tr") %>% # first get all rows (tr, its getting from source code) separately 
+  html_nodes("td") %>% # then get all cells (td)
+  html_text2()         # html_text() retrives text from html element
+df <- as.data.frame(table_data)
+
+# Get column names, turn into list, when transforming into df, the ncol = the list column_length
+column_names <- read_html(source) %>%  # extract list of column names, convert to text after using html_text2
+  html_nodes("div.table-responsive:nth-child(8) > table:nth-child(1) > thead:nth-child(1)") %>% 
+  html_nodes("th") %>%  # extracting table headers (th)
+  html_text2()
+print(column_names) # vector of 12 names, just a check
+
+column_length <- length(column_names) # 12, length gets/sets the length of a vector (which is a list)
+
+# First turn lists into matrix w correct # of cols then make a tibble 
+df <- matrix(table_data, ncol = column_length, byrow = TRUE) %>% 
+  as_tibble()
+
+colnames(df) <- column_names 
+#str(df) # all chrs 
+# df <- df %>% select(-1, -2)  # remove first two columns, not sure where/ when to run this prolly after 
+                             # everything is scraped 
+
+#### Pagination repeat function ####
+repeat {
+next_button <- remDr$findElement(using = "xpath", value = '//a[@title = "Next Page"]') # locate netx button
+
+next_button$clickElement()  # Click next button 
+Sys.sleep(2)                # Sleep 3 seconds 
+
+if (length(remDr$findElements(using = "xpath", value = '//a[@title = "Next Page"]')) == 0) { # a check! 
+  break
+  }
+}
+
+# Appending newly scraped df to all data 
+all_data <- list() 
+
+all_data <- rbindlist(list(all_data, df))
+```
+
+```{r ffox_subpages, eval = FALSE}
+# NOT WORKING RN 
+# Navigating to sub pages on the Activtiy # the a elements 
+a_elements <- read_html(remDr$getPageSource()[[1]]) %>%
+  html_nodes("tr") %>%
+  html_nodes("td") %>% # get a elemtns from the source (html) of the base_url
+  html_elements(css = "div.package > a")
+a_elements
+
+website_html <- "https://www.osha.gov/ords/imis/establishment.search?p_logger=1&establishment=&State=CA&officetype=all&Office=950644&sitezip=&p_case=all&p_violations_exist=yes&startmonth=10&startday=03&startyear=2019&endmonth=10&endday=03&endyear=2024" %>% 
+  read_html()
+td_cell_elements <- source %>% 
+  html_nodes("tr") %>% 
+  html_nodes("td") 
+#bcus a elements (links) are inside the td (cells) i must extract all a tags w/ in the td cells 
+a_elements <- td_cell_elements %>%  
+  html_elements("a") # selecting the a elements from the html source - here its from the td_cel_elements html source
+a_elements_links <- a_elements %>% 
+  html_attr("href") #gets attribute from html source code 
+a_element_links
+```
+
+```{r ffox2_subpages, eval = FALSE}
+# SCRAPE SUB PAGE working but abandoning 
+activityElem <- remDr$findElement(using = "css selector", # finds the activity link using 
+                                       value ="tbody tr:nth-child(1) td:nth-child(3)") # relative css selector 
+activityElem$clickElement()  #clicks the activity link 
+Sys.sleep(2)
+source <- remDr$getPageSource()[[1]] # source() retrieves current HTML of webpage as a list, and [[1]] extracts first  # (and only) item in that list, which is full HTML code as a string
+# Extract paragraphs based on their HTML structure, using single-line selector(no spaces)
+ptext <- read_html(source) %>%  
+  html_nodes("div.row-fluid:nth-child(9) > div:nth-child(1) > p:nth-child(1), #site address
+              div.row-fluid:nth-child(9) > div:nth-child(2) > p:nth-child(1), # union 
+              div.row-fluid:nth-child(9) > div:nth-child(3) > p:nth-child(2), # NAICS 
+              div.row-fluid:nth-child(11) > div:nth-child(2) > p:nth-child(1),# safety 
+              div.row-fluid:nth-child(11) > div:nth-child(2) > p:nth-child(3)") %>% 
+  html_text2()
+# print(ptext) # Print the extracted text, currently a vector it works! 10/14  
+# Violation Summary Table: getting total current violations and current penalty  
+table_body2 <- read_html(source) %>% 
+  html_nodes(".tablei > tbody:nth-child(2) > tr") #looking at tablei, tbody, nth child 2, all the rows (tr)
+# 10/14, it works!!! and its already a function :) must be appended into the larger script 
+table_data2 <- table_body2 %>% 
+  map_df(function(.x) { # already looking at all rows (as a string) so .x represents each element of the vector, 
+    data.frame(         # in this case each .x is a row (tr) element 
+      current_vil = html_node(.x, "tr:nth-child(3) > td:nth-child(7)") %>% html_text2(), # tbl row 3, cell 7
+      current_pen = html_node(.x, "tr:nth-child(5) > td:nth-child(7)") %>% html_text2()  # tbl row 5, cell 7
+    )# must tell function to look into .x bcus this searches w/ in specified rows of  table_body2 
+  }) # instead of excluding it and then telling the function to search the entire document? 
+     # map_df is superseded meaning it will. not be replaced but there are other syntax recommendations 
+```
+
+```{r iterate_activity_scrape}
+# 1: SETUP 
+remDr$open()
+base_url <- "https://www.osha.gov/ords/imis/establishment.search?p_logger=1&establishment=&State=CA&officetype=all&Office=950644&sitezip=&p_case=all&p_violations_exist=yes&startmonth=10&startday=14&startyear=2019&endmonth=10&endday=14&endyear=2024" 
+remDr$navigate(base_url)
+Sys.sleep(3) 
+remDr$maxWindowSize()
+source <- remDr$getPageSource()[[1]]
+
+# 2: PLUG IN SCRAPE OF INITIAL TABLE 
+
+# 3: get all links for activity # using for loop, navigate and scrape w/ in them
+# FAILED Attempt 2 - neither work :( i am sad. 10/16 update, ending web scraping. 
+parsed_html <- read_html(source)
+links <- parsed_html %>% 
+  html_nodes("div.table-responsive:nth-child(8) > table:nth-child(1) tbody tr") %>% 
+  html_nodes("td a") %>% # each row has links in <a> tags inside <td>
+  html_attr("href") # Extract href attributes
+print(links)
+# https://www.osha.gov/ords/imis/establishment.search?p_logger=1&establishment=&State=CA&officetype=all&Office=950644&sitezip=&p_case=all&p_violations_exist=yes&startmonth=10&startday=14&startyear=2019&endmonth=10&endday=14&endyear=2024 
+# https://www.osha.gov/ords/imis/establishment.inspection_detail?id=1763527.015
+# FAILED Attempt 1 below
+rows <- remDr$findElements(using = "css selector", value ="div.table-responsive:nth-child(8) table tbody tr") # rows - find all row elements first, its only getting row 1!!! 
+links <- sapply(rows, function(row) {   # Getting links: iterate over each row to get links 
+  a_tag <- row$findElement(using = "css", value = "td a")
+    a_tag$getElementAttribute("href")   # get link itself from <a> (anchor element)
+})
+print(links)
+#
+for (link in links){
+  remDr$navigate(links) # navigate to the link in vector links
+  #SCRAPE FUNCTION HERE
+}
+```
+
+```{r ffox_debug}
+## DEBUGGING## # alternative approach below, fixed code above was missing html_nodes("th") in order to extract cell
+##               values of the css selector 
+# Up to this point 10/7 the data wasnt scraped properly, it is in a long 1 column dataframe 
+#num_cols <- 12
+#num_rows <- length(table_data)/num_cols
+# matrix_table_data <- matrix(table_data, ncol = num_cols, byrow = TRUE) %>% 
+ # as_tibble()
+# colnames(matrix_table_data) <- column_names
+# there is an issue w the way column names are being extracted, try different css selector, if it fails, try new written
+# vector 
+```
+
+10/ 16
+
+-   ending for now. very close to just scraping all pages but not the subpages unfortunately!
+
+10/15
+
+-   great progress but on the note of why the function is iterating over the first row 20 times instead of each row once
+
+    -   This usually happens if the `findElement` (singular) method is used instead of `findElements` (plural), or if you're not properly referencing each individual row during iteration. but I have used plural!! to no avail
+
+[**10/14**]{.underline}
+
+CSS selector
+
+-   
+
+[10/10/224]{.underline}
+
+-   do we need the script to create a predefined list for the total activity number? yes i believe
+
+-   **To do: Following along with web scrape premier league**
+
+1.  create a list of all activity numbers (href links) from the readable HTML source (its a string from a list)
+2.  I.e. **see code chunk.** So i must find all "link" items in the row elements that have attribute href. html_attr then extracts value of the "data-option-name" attribute from the li elements, which are the season names
+3.  "As you can see, we have an attribute named 'data-dropdown-list' whose value is 'FOOTBALL_COMPSEASON' and inside we have 'li' tags where the attribute 'data-option-name' changes for each season."
+
+```{r notes, eval = FALSE}
+#FOR EXMAPLE:
+list_seasons <- read_html(source) %>%
+  html_nodes("ul[data-dropdown-list=         # find all list (li) items in the ul elements that have attribute [data-dropdown-
+             FOOTBALL_COMPSEASON] > li") %>% # list=FOOTBALL...] targetting the specific dropdown list for seasons 
+  html_attr("data-option-name")
+```
+
+10/4/24
+
+-   after I find the correct html elements/ and their css selectors I should replicate the for loop code below to get all html source from all pages, then can parse it out correctly into a dataframe (rvest)
+-   div.table-responsive:nth-child(8) refers to 8th child element div w/ class table responsive
+
+**10/7/24 - monday**
+
+-   finally got the base scrape down (df), now I gotta deal with pagination and inspection details
+
+-   **Pagination**: locate 'next' web element to run at the end of the initial scrape, sys.sleep(\_), extract only the table body, dont need table headers? See wickham [github](https://github.com/hadley/web-scraping/blob/main/pagination.R)
+
+-   **Index pages: Inspection detail:** can navigate and click it, then scrape site address, union status, naics, row fluid class under it, case status, violation summary, and violation items
+
+    -   the issue here is creating the new variables, will be a new set of 10+ variables – will prolly happen after using same methods
+
+    -   **Violation summary:** only retrieve Current violations/ penalty from the total row
+
+    -   **violation items:** not sure at all how to get standard cited since there is more than 1 unique value there can be x amount of unique standards cited but surely not unlimited, dont need to get all since it is already common knowledge what standards are cited most frequently (provided by OSHA) could probably just check if heat standard is mentioned and if so to make it Y/N
+
+-   wrapper functions:
+
+-   ultimate goal:
+
+\<table\> 
+
+\<tr\>
+
+\<td\>Row 1, Cell 1\</td\> #td defines a cell in the row
+
+\<td\>Row 1, Cell 2\</td\>
+
+\</tr\> 
+
+\<tr\>
+
+ \<td\>Row 2, Cell 1\</td\>
+
+\<td\>Row 2, Cell 2\</td\>
+
+\</tr\>
+
+\</tr\>
+
+<td>
+
+\<a href="establishment.inspection detail? id = \####### title = "\#######" \>
+
+<em>1763527.015</em>
+
+</td>
+
+ \</table\>
+
+**Scraping programmatically from [stack overflow](https://stackoverflow.com/questions/50557299/scrape-a-paginated-table-in-r):** start by writing a function that takes a page number, finds the link for that page, clicks on the link, and returns the HTML source for that page:
+
+useful functions
+
+-   `findElement(using =, value=)`: Search for an element on the page, starting from the document root. The located element will be returned as an object of webElement class. To use this function you need some basic knowledge of HTML and CSS (or xpath, etc). Using a Chrome extension, called [**SelectorGadget**](https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb?hl=es), might help.
+
+-   `highlightElement()`: Utility function to highlight current Element. This helps to check that you selected the wanted element.
+
+-   `sendKeysToElement()`: Send a sequence of keystrokes to an element. The keystrokes are sent as a list. Plain text is entered as an unnamed element of the list. Keyboard entries are defined in ‘selKeys‘ and should be listed with the name ‘key‘.
+
+-   **`getPageSource()[[1]]`:** **Get the current page source. This method combined with \`rvest\` is what makes possible to scrape dynamic web pages.** The xml document returned by the method can then be read using `rvest::read_html()`. This method returns a \`list\` object, that's the reason behind `[[1]]`.
+
+```         
+get_html <- function(i) {
+  webElem <- remDr$findElement(using = "link text", as.character(i))
+  webElem$clickElement()
+  Sys.sleep(s)
+  remDr$getPageSource()[[1]]
+}
+```
+
+```         
+s <- 2 # seconds to wait between each page
+total_pages <- 17
+html_pages <- vector("list", total_pages)
+```
+
+Start the browser, navigate to page 1, and save the source:
+
+```         
+library(RSelenium)
+rD <- rsDriver()
+remDr <- rD[["client"]]
+base_url <- "http://dgsp.cns.gob.mx/Transparencia/wConsultasGeneral.aspx"
+remDr$navigate(base_url)
+src <- remDr$getPageSource()[[1]]
+html_pages[1] <- src
+```
+
+For pages 2 to 17, we use a for-loop and call the function we wrote above, taking care to account specially for page 11:
+
+```         
+for (i in 2:total_pages) {
+  if (i == 11) {
+    webElem <- remDr$findElement(using = "link text", "...")
+    webElem$clickElement()
+    Sys.sleep(s)
+    html_pages[i] <- remDr$getPageSource()[[1]]
+  } else {
+    html_pages[i] <- get_html(i)  
+  }
+}
+remDr$close()
+```
+
+The result is `html_pages`, a list of length 17, with each element the HTML source for each page. 

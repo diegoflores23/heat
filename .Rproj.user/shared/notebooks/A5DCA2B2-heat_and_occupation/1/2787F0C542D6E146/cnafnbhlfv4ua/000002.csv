@@ -1,6 +1,0 @@
-"0","lac_naics <- qcewGetAreaData(""2023"", ""a"", ""06037"") %>% "
-"0","  clean_names()     #all industries in LAC "
-"0","oc_naics <- qcewGetAreaData(""2023"", ""a"", ""06059"") %>% "
-"0","  clean_names()     # all in OC"
-"0","sb_naics <- qcewGetAreaData(""2023"", ""a"", ""06071"") %>% "
-"0","  clean_names()     # all in SB county "

@@ -11,6 +11,8 @@ navbar:
       href: about.html
     - text: "Resources"
       href: resources.html
+    - text: "Methods"
+      href: methods.html
 output: 
   html_document:
     theme: sandstone

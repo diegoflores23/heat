@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Notes – Heat and Occupation</title>
+<title>Notes/ Literature Review – Heat and Occupation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -71,13 +105,16 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="assets_css/styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/socalcoshlogo.jpg" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Heat and Occupation</span>
     </a>
@@ -119,13 +156,31 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#data-sources" id="toc-data-sources" class="nav-link active" data-scroll-target="#data-sources"><strong>Data Sources</strong></a>
+  <ul class="collapse">
+  <li><a href="#general-cont." id="toc-general-cont." class="nav-link" data-scroll-target="#general-cont."><strong>General (cont.)</strong></a></li>
+  <li><a href="#literature-review" id="toc-literature-review" class="nav-link" data-scroll-target="#literature-review">Literature Review</a></li>
+  <li><a href="#general-tips" id="toc-general-tips" class="nav-link" data-scroll-target="#general-tips">General tips</a>
+  <ul class="collapse">
+  <li><a href="#article-layout-chapter-quarto-very-useful" id="toc-article-layout-chapter-quarto-very-useful" class="nav-link" data-scroll-target="#article-layout-chapter-quarto-very-useful">Article Layout chapter (quarto) very useful</a></li>
+  <li><a href="#codebook-notes" id="toc-codebook-notes" class="nav-link" data-scroll-target="#codebook-notes"><strong>CODEBOOK notes</strong></a></li>
+  </ul></li>
+  <li><a href="#heat-and-occupation-notes" id="toc-heat-and-occupation-notes" class="nav-link" data-scroll-target="#heat-and-occupation-notes">heat and occupation NOTES</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Notes</h1>
+<h1 class="title">Notes/ Literature Review</h1>
 </div>
 
 
@@ -148,8 +203,8 @@ ul.task-list li input[type="checkbox"] {
 <hr>
 <section id="data-sources" class="level1">
 <h1><strong>Data Sources</strong></h1>
-<section id="data-general-cont." class="level3">
-<h3 class="anchored" data-anchor-id="data-general-cont."><strong>Data general (cont.)</strong></h3>
+<section id="general-cont." class="level3">
+<h3 class="anchored" data-anchor-id="general-cont."><strong>General (cont.)</strong></h3>
 <ul>
 <li><p>Emergency department encounters: various available but Pivot profiles includes all ED data files and inpatient discharge data file (for admissions originating in the emergency department) aggregated at the hospital level. number of visits, expected payer, discharge disposition, age groups, sex, preferred language spoken, race groups, principal diagnosis groups, and principal external cause of injury/morbidity groups. – find source link</p></li>
 <li><p>CDC heat and Health Index (<a href="https://ephtracking.cdc.gov/Applications/heatTracker/">HHI</a>) this can be joined with labor occupation data from BLS or ACS to find the percentage of warehouse/ logistics workers and other industries that may be disproportionately impacted by indoor heat&nbsp;</p>
@@ -172,7 +227,6 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <section id="data-source-iv-webscraping-osha-establishment-searches" class="level4">
 <h4 class="anchored" data-anchor-id="data-source-iv-webscraping-osha-establishment-searches">Data Source IV: webscraping OSHA establishment searches</h4>
-<pre><code></code></pre>
 <p><strong>Methods Q:</strong> webscrape search by industry, or do a broad establishment search? I think broad establishment search of all of So Cal or all of california? then subset by all these zip codes? Or start by zip code (one by one) that ultimately encompasses area of interest.</p>
 <ul>
 <li>by region: Region 3 – Santa Ana Regional Office, Region 4 – Monrovia Regional Office</li>
@@ -201,8 +255,75 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="data-source-i-cont-quarterly-census-of-employment-and-wages-qcew" class="level4">
 <h4 class="anchored" data-anchor-id="data-source-i-cont-quarterly-census-of-employment-and-wages-qcew"><strong>Data Source I (cont): Quarterly Census of Employment and Wages QCEW</strong></h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">FALSE</span>, <span class="at">eval =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># minor renaming &amp; FILTER FOR INDUSTRIES OF INTEREST </span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#lac_naics24 &lt;- lac_naics24 %&gt;%</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> <span class="co"># rename(naics = industry_code) %&gt;% </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#filter(naics %in% c("811192", "315",   # %&gt;%, filter for NAICS obsvr that r in this vector</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"493110"</span>, <span class="st">"722513"</span><span class="er">))</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#oc_naics24 &lt;-  oc_naics24 %&gt;% # Industries of interest below in LA county</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">fips =</span> area_fips, </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">naics =</span> industry_code) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(naics <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"811192"</span>, <span class="st">"315"</span>,   <span class="co"># %&gt;%, filter: see if NAICS obsvr r in the vector</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"493110"</span>, <span class="st">"722513"</span>))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>sb_naics24 <span class="ot">&lt;-</span> sb_naics24 <span class="sc">%&gt;%</span> </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">fips =</span> area_fips,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">naics =</span> industry_code) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(naics <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"811192"</span>, <span class="st">"315"</span>,   <span class="co"># %&gt;%, filter: see if NAICS obsvr r in the vector</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"493110"</span>, <span class="st">"722513"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#filter public/ federal for 2023 </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>lac_naics <span class="ot">&lt;-</span> lac_naics <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">flag =</span> <span class="fu">ifelse</span>(lac_naics<span class="sc">$</span>own_code <span class="sc">==</span> <span class="dv">3</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(flag <span class="sc">==</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>oc_naics <span class="ot">&lt;-</span> oc_naics <span class="sc">%&gt;%</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">flag =</span> <span class="fu">ifelse</span>(oc_naics<span class="sc">$</span>own_code <span class="sc">==</span> <span class="dv">3</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(flag <span class="sc">==</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#sb_naics24$flag &lt;- sb_naics24 %&gt;% </span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#mutate(flag = (case_when(own_code == 3 | own_code == 1 ~ TRUE,</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">#         TRUE ~ FALSE ))) #general condition!! </span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>sb_naics <span class="ot">&lt;-</span> sb_naics <span class="sc">%&gt;%</span> </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">flag =</span> <span class="fu">case_when</span>(own_code<span class="sc">==</span><span class="dv">3</span> <span class="sc">|</span> own_code <span class="sc">==</span><span class="dv">1</span> <span class="sc">~</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                          <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(flag <span class="sc">==</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>lac_naics24 <span class="ot">&lt;-</span> lac_naics24 <span class="sc">%&gt;%</span> </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">flag =</span> <span class="fu">ifelse</span>(lac_naics24<span class="sc">$</span>own_code <span class="sc">==</span> <span class="dv">3</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(flag <span class="sc">==</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>oc_naics24 <span class="ot">&lt;-</span> oc_naics24 <span class="sc">%&gt;%</span> </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">flag =</span> <span class="fu">ifelse</span>(oc_naics24<span class="sc">$</span>own_code <span class="sc">==</span> <span class="dv">3</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(flag <span class="sc">==</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co">#sb_naics24$flag &lt;- sb_naics24 %&gt;% </span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="co">#mutate(flag = (case_when(own_code == 3 | own_code == 1 ~ TRUE,</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">#         TRUE ~ FALSE ))) #general condition!! </span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>sb_naics24 <span class="ot">&lt;-</span> sb_naics24 <span class="sc">%&gt;%</span> </span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">flag =</span> <span class="fu">case_when</span>(own_code<span class="sc">==</span><span class="dv">3</span> <span class="sc">|</span> own_code <span class="sc">==</span><span class="dv">1</span> <span class="sc">~</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>                          <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(flag <span class="sc">==</span> <span class="cn">FALSE</span>) <span class="co">#FILTER public or fed govt rows out</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#2023 </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lac_naics <span class="ot">&lt;-</span> <span class="fu">qcewGetAreaData</span>(<span class="st">"2023"</span>, <span class="st">"a"</span>, <span class="st">"06037"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()     <span class="co">#all industries in LAC </span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>oc_naics <span class="ot">&lt;-</span> <span class="fu">qcewGetAreaData</span>(<span class="st">"2023"</span>, <span class="st">"a"</span>, <span class="st">"06059"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()     <span class="co"># all in OC</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>sb_naics <span class="ot">&lt;-</span> <span class="fu">qcewGetAreaData</span>(<span class="st">"2023"</span>, <span class="st">"a"</span>, <span class="st">"06071"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()     <span class="co"># all in SB county </span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#2024</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>lac_naics24 <span class="ot">&lt;-</span> <span class="fu">qcewGetAreaData</span>(<span class="st">"2024"</span>, <span class="st">"1"</span>, <span class="st">"06037"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>oc_naics24 <span class="ot">&lt;-</span> <span class="fu">qcewGetAreaData</span>(<span class="st">"2024"</span>, <span class="st">"1"</span>, <span class="st">"06059"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()     <span class="co"># all in OC</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>sb_naics24 <span class="ot">&lt;-</span> <span class="fu">qcewGetAreaData</span>(<span class="st">"2024"</span>, <span class="st">"1"</span>, <span class="st">"06071"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()     <span class="co"># all in SB county </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
-<li><p>Purpose: quarterly count of employment and wages by county, MSA, state, etc, by AREA and <strong>NAICS (industry)</strong>.&nbsp;</p></li>
+<li></li>
+<li><p>urpose: quarterly count of employment and wages by county, MSA, state, etc, by AREA and <strong>NAICS (industry)</strong>.&nbsp;</p></li>
 <li><p><strong>CALCULATIONS:</strong></p>
 <ul>
 <li><p>% change in employment: (Growth) (warehouse/ logistics, carwash, fast food/ service)</p></li>
@@ -246,6 +367,82 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Possible source for location of warehouses see bookmarks bar, rocket mortgage</li>
 </ul>
+</section>
+</section>
+<section id="literature-review" class="level2">
+<h2 class="anchored" data-anchor-id="literature-review">Literature Review</h2>
+<p><u><strong>Calmatters</strong> 4/24 Waiting and sweltering: Why are California’s indoor heat protections for workers five years late?</u></p>
+<ul>
+<li><p>2005 outdoor heat standard passsed first of its kind in the country, &gt;80 = water+ shade, &lt;95 = additional breaks + monitoring. “a 2021 study [IZA] suggested it has helped to decrease workplace injuries on hot days.” outlining the importance of indoor heat standard and mentioning citations</p></li>
+<li><p>IZA institute on the study of labor found that these policies have a significant reduction in workplace injuries (find claim).</p></li>
+<li><p>Amazon citation mentioned in article calosha <a href="https://calmatters.org/wp-content/uploads/2024/02/KSBD-CalOSHA-Heat-Citations-01-31-24.pdf">complaints</a> from amazon fulfiment center 2535 e 3rd st san bernardino , subsequent agree/ disagree</p></li>
+</ul>
+<p><u><strong>Jisung park,</strong> IZA, Temperature, Workplace Safety, and Labor Market Inequality</u></p>
+<ul>
+<li>“Hotter temperature increases workplace injuries significantly, causing approximately 20,000 injuries per year. The effects persist in both outdoor and indoor settings (e.g.&nbsp;manufacturing, warehousing), and for injury types ostensibly unrelated to temperature (e.g.&nbsp;falling from heights), consistent with cognitive or cost-related channels.” (1)</li>
+</ul>
+<p><u><strong>Hauptman.</strong> The Health and Safety of Incarcerated Workers: OSHA’s Applicability in the Prison Context</u></p>
+<ul>
+<li><p>“This article documents how current occupational health and safety regulations and enforcement mechanisms fail to protect incarcerated workers, who are especially vulnerable to both unsafe working condi- tions and arbitrary retaliation” (73)</p></li>
+<li><p>provides history of prison labor, history of OSHA and their enforcment mechanisms, part 3 the term “employee” as applied to prisoners and the consistent prisoner exemption of fed protective legislation</p></li>
+</ul>
+<p><u><strong>Behrer et al.</strong> Heat has larger impacts on labor in poorer areas</u></p>
+<ul>
+<li>alternatively their 1 sentence summary reads “Wealth moderates the negative income effects of heat.” a kind of vice versa, meaning wealth differences/ inequality mitigate the (negative) impact of heat on labor productivity, labor income, and work hours. This suggests those with wealth suffer less income losses, specifically payroll income, due to the ability of wealth to absorb the negative impacts of heat.</li>
+</ul>
+</section>
+<section id="general-tips" class="level2">
+<h2 class="anchored" data-anchor-id="general-tips">General tips</h2>
+<p><strong>Citations and references workflow</strong></p>
+<ul>
+<li>Follow hands on Data Viz’s workflow: <a href="https://handsondataviz.org/zotero.html">Zotero and Better BibTeX for Notes and Biblio</a></li>
+</ul>
+<p><u><strong>Mapping using tigris</strong></u> – mapping chapter in <a href="https://bookdown.org/rdpeng/RProgDA/mapping.html">Mastering Software Dev in R</a></p>
+<ul>
+<li><p>Awesome ability to pull state county &amp; tracts from US census, loaded as a spatial object <strong>see</strong> <a href="https://walker-data.com/census-r/census-geographic-data-and-applications-in-r.html">walker data</a><strong>bookdown on tigris, examples below</strong></p></li>
+<li><p>see further documentation from Walker <a href="https://journal.r-project.org/archive/2016-2/walker.pdf">here</a> - great maps on average income by zip code</p></li>
+<li><p>I shoudl create an interactive map such as this title <a href="https://crd230.github.io/lab3.html">sac.map</a> leaflet with median income chloropleth and the sac metro area shapefile</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">eval =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">library</span>(sp)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">library</span>(ggplot2)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    denver_tracts <span class="ot">&lt;-</span> <span class="fu">tracts</span>(<span class="at">state =</span> <span class="st">"CO"</span>, <span class="at">county =</span> <span class="dv">31</span>, <span class="at">cb =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">class =</span> <span class="st">"sf"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(denver_tracts)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    ca_county <span class="ot">&lt;-</span> <span class="fu">counties</span>(<span class="st">"CA"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(ca_county<span class="sc">$</span>geometry)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    lac <span class="ot">&lt;-</span> <span class="fu">tracts</span>(<span class="st">"CA"</span>, <span class="st">"los angeles county"</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(lac) <span class="sc">+</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_sf</span>() <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="article-layout-chapter-quarto-very-useful" class="level3">
+<h3 class="anchored" data-anchor-id="article-layout-chapter-quarto-very-useful">Article Layout chapter (<a href="https://quarto.org/docs/authoring/article-layout.html#available-columns">quarto</a>) very useful</h3>
+<ul>
+<li>specifically <a href="https://quartoand.me/page-layout">columns specifiers</a></li>
+</ul>
+<p><strong>Creating multi-column <a href="https://rfortherestofus.com/2021/11/multicolumn">layouts</a>/ Combining mulitple plots into one</strong></p>
+<ul>
+<li><p>patchwork or cowplot to combine multilpe ggplot2 lots</p></li>
+<li><p>Custom css</p></li>
+<li><p>grid arrange may work really well too see google doc notes on image lit review</p></li>
+</ul>
+<p><strong>page layout:</strong> qmd <a href="https://quarto.org/docs/output-formats/page-layout.html#grid-customization">documentation</a> is very helpful here.</p>
+<ul>
+<li><p>see <a href="https://quartoand.me/page-layout">quartoandme</a> page layout article</p></li>
+<li><p>default qmd is article format, centered at middle for readability (600px - 900px wide) for landing or index pages consider using other layouts. Examples below of divs and column layout</p></li>
+</ul>
+<p>how to wrap text around a figure github answer <a href="https://github.com/quarto-dev/quarto-cli/discussions/11053">here</a></p>
+<ul>
+<li>essentially you can do it in divs and set the div to float and include text in another div that is under it</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fomrat<span class="sc">:</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>html<span class="sc">:</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>page<span class="sc">-</span>layout<span class="sc">:</span> article, full, <span class="fu">custom</span> (use the css grid system)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p><a href="https://www.productive-r-workflow.com/quarto-tricks#toc">quarto tips and tricks</a> - has a ton of good tips, footnotes, iframe, tabs, etc</p>
 <p><a href="https://quarto.org/docs/authoring/figures.html">quarto bookdown</a> - quarto documentation</p>
 <ul>
@@ -278,13 +475,66 @@ Figure&nbsp;1: Elephant
 <li><p>chart.js/ highchart good templates</p></li>
 <li><p>also geospatial is his book <a href="https://ontheline.trincoll.edu">On The Line</a></p></li>
 </ul>
+<p><strong>Area notes:</strong> 06037 Los Angeles County,</p>
+<p>California 06059 Orange County,</p>
+<p>California 06071 San Bernardino County, California</p>
+<p>Operating warehousing and storage facilities and providing related logistics services–are classified in Industry Group 4931, Warehousing and Storage.</p>
+</section>
+<section id="codebook-notes" class="level3">
+<h3 class="anchored" data-anchor-id="codebook-notes"><strong>CODEBOOK notes</strong></h3>
+<p>own_code - 3 = public ownersip</p>
+<p>annual_avg_estabs = Annual average of quarterly establishment counts for a given year</p>
+<p>total_annual_wages = Sum of the four quarterly total wage levels for a given year</p>
+<p>annual_contributions = Sum of the four quarterly contribution totals for a given year</p>
+<p>annual_avg_wkly_wage = Avg weekly wage based on 12-monthly employment levels and annual wage levels.</p>
+<p>avg_annual_pay = Average annual pay</p>
+<p>location quotient: over the year change</p>
+<section id="current-population-survey" class="level4">
+<h4 class="anchored" data-anchor-id="current-population-survey"><strong>Current Population Survey</strong></h4>
+<p>CPS counts employed people, whereas the QCEW program counts covered.</p>
+<p><a href="https://www.bls.gov/cew/"><strong>QCEW 2024 Q1 data available</strong></a></p>
+<p>DATA: retrieving by area/county then subsetting by NAICS/inudstry</p>
+</section>
+</section>
+</section>
+<section id="heat-and-occupation-notes" class="level2">
+<h2 class="anchored" data-anchor-id="heat-and-occupation-notes">heat and occupation NOTES</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ffood <span class="ot">&lt;-</span> <span class="fu">qcewGetIndustryData</span>(<span class="st">"2023"</span>, <span class="st">"a"</span>, <span class="st">"722513"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>lac_ff <span class="ot">&lt;-</span> ffood <span class="sc">%&gt;%</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">fips =</span> area_fips) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(fips <span class="sc">==</span> <span class="st">"06037"</span>) </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>carwash <span class="ot">&lt;-</span> <span class="fu">qcewGetIndustryData</span>(<span class="st">"2023"</span>, <span class="st">"a"</span>, <span class="st">"811192"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>lac_carwash <span class="ot">&lt;-</span> carwash <span class="sc">%&gt;%</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">fips =</span> area_fips) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(fips <span class="sc">==</span> <span class="st">"811192"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>qcewGetIndustryData <span class="ot">&lt;-</span> <span class="cf">function</span> (year, qtr, industry) {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    url <span class="ot">&lt;-</span> <span class="st">"http://data.bls.gov/cew/data/api/YEAR/QTR/industry/INDUSTRY.csv"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    url <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"YEAR"</span>, year, url, <span class="at">ignore.case=</span><span class="cn">FALSE</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    url <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"QTR"</span>, <span class="fu">tolower</span>(qtr), url, <span class="at">ignore.case=</span><span class="cn">FALSE</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    url <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"INDUSTRY"</span>, industry, url, <span class="at">ignore.case=</span><span class="cn">FALSE</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read.csv</span>(url, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">","</span>, <span class="at">quote=</span><span class="st">"</span><span class="sc">\"</span><span class="st">"</span>, <span class="at">dec=</span><span class="st">"."</span>, <span class="at">na.strings=</span><span class="st">" "</span>, <span class="at">skip=</span><span class="dv">0</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>ran into issues in bind row merge some NA’s that are fine but parse out the rows rthat have 0 taxable qtrly wages etc, no industry value in lac_naics24 – Issue solved!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#str(industries24)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>industries24 <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(fips, naics)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dfSummary</span>(</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">graph.col =</span> <span class="cn">TRUE</span>, <span class="at">style =</span> <span class="st">"grid"</span>, </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">graph.magnif =</span> <span class="fl">0.75</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">stview</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 </section>
 </section>
-</section>
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -840,6 +840,7 @@ usethis, vctrs (>= 0.2.3), withr","winch","MIT + file LICENSE",NA,NA,NA,NA,"yes"
 0.36), yaml (>= 2.1.19)",NA,"digest, dygraphs, fs, rsconnect, downlit (>= 0.4.0), katex
 (>= 1.4.0), sass (>= 0.4.0), shiny (>= 1.6.0), testthat (>=
 3.0.3), tibble, vctrs, cleanrmd, withr (>= 2.4.2), xml2",NA,"GPL-3",NA,NA,NA,NA,"no","4.4.0"
+"rmdformats","rmdformats","/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library","1.0.4",NA,NA,"knitr, rmarkdown, bookdown, htmltools",NA,"questionr, DT, palmerpenguins, ggplot2",NA,"GPL (>= 2)",NA,NA,NA,NA,"no","4.4.0"
 "rnaturalearth","rnaturalearth","/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library","1.0.1",NA,"R (>= 3.1.1)","httr (>= 1.1.0), jsonlite, sf (>= 0.3-4), terra, utils (>=
 3.2.3)",NA,"devtools (>= 1.10.0), dplyr, ggplot2, ggrepel, knitr (>=
 1.12.3), lifecycle (>= 1.0.3), pbapply, purrr, rlang,

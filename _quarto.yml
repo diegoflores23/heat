@@ -3,7 +3,10 @@ project:
 
 website: 
   title: "Heat and Occupation"
+  back-to-top-navigation: true
   navbar: 
+    search: true 
+    logo: "images/socalcoshlogo.jpg"
     left: 
     - text: "Home"
       href: index.qmd
@@ -15,8 +18,13 @@ website:
       href: resources.qmd
     - text: "Methods"
       href: methods.qmd
+   
 format: 
   html:
     theme: sandstone
     css: "assets_css/styles.css"
+    grid:
+      body-width: 900px
+    toc: true
+     
   

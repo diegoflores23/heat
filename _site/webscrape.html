@@ -105,13 +105,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="assets_css/styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/socalcoshlogo.jpg" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Heat and Occupation</span>
     </a>
@@ -153,7 +156,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#notes-for-webscraping" id="toc-notes-for-webscraping" class="nav-link active" data-scroll-target="#notes-for-webscraping">Notes for webscraping</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -227,12 +238,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>What percent of complaints actually result in violations? This is 5 year range 1059/ 1706 – 62%</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("rvest")</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("pdftools")</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("xml2")</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("RSelenium")</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("binman")</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pdftools)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">eval =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("rvest") </span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("pdftools")</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("xml2")</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("RSelenium")</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("binman")</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("purrr")</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pdftools)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Using poppler version 23.04.0</code></pre>
 </div>
@@ -390,333 +404,185 @@ Attaching package: 'dplyr'</code></pre>
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>rD <span class="ot">&lt;-</span> RSelenium<span class="sc">::</span><span class="fu">rsDriver</span>(<span class="at">browser =</span> <span class="st">"firefox"</span>, <span class="at">port =</span> <span class="dv">4569</span>L) <span class="co"># start session</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>checking Selenium Server versions:</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>BEGIN: PREDOWNLOAD</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>BEGIN: DOWNLOAD</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>BEGIN: POSTDOWNLOAD</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>checking chromedriver versions:</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>BEGIN: PREDOWNLOAD</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>BEGIN: DOWNLOAD</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>BEGIN: POSTDOWNLOAD</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>checking geckodriver versions:</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>BEGIN: PREDOWNLOAD</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>BEGIN: DOWNLOAD</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>BEGIN: POSTDOWNLOAD</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>checking phantomjs versions:</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>BEGIN: PREDOWNLOAD</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>BEGIN: DOWNLOAD</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>BEGIN: POSTDOWNLOAD</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Connecting to remote server"
-$acceptInsecureCerts
-[1] FALSE
-
-$browserName
-[1] "firefox"
-
-$browserVersion
-[1] "131.0"
-
-$`moz:accessibilityChecks`
-[1] FALSE
-
-$`moz:buildID`
-[1] "20240923135042"
-
-$`moz:geckodriverVersion`
-[1] "0.35.0"
-
-$`moz:headless`
-[1] FALSE
-
-$`moz:platformVersion`
-[1] "23.6.0"
-
-$`moz:processID`
-[1] 48784
-
-$`moz:profile`
-[1] "/var/folders/dc/92b4rct96931sct_xtgblqv00000gn/T/rust_mozprofileWglYQs"
-
-$`moz:shutdownTimeout`
-[1] 60000
-
-$`moz:webdriverClick`
-[1] TRUE
-
-$`moz:windowless`
-[1] FALSE
-
-$pageLoadStrategy
-[1] "normal"
-
-$platformName
-[1] "mac"
-
-$proxy
-named list()
-
-$setWindowRect
-[1] TRUE
-
-$strictFileInteractability
-[1] FALSE
-
-$timeouts
-$timeouts$implicit
-[1] 0
-
-$timeouts$pageLoad
-[1] 300000
-
-$timeouts$script
-[1] 30000
-
-
-$unhandledPromptBehavior
-[1] "dismiss and notify"
-
-$userAgent
-[1] "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:131.0) Gecko/20100101 Firefox/131.0"
-
-$webdriver.remote.sessionid
-[1] "8d2e7a4b-8c8e-478c-923a-208100b7cbec"
-
-$id
-[1] "8d2e7a4b-8c8e-478c-923a-208100b7cbec"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>remDr <span class="ot">&lt;-</span> rD[[<span class="st">"client"</span>]] <span class="co"># Assign the client to an object</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>rD <span class="ot">&lt;-</span> RSelenium<span class="sc">::</span><span class="fu">rsDriver</span>(<span class="at">browser =</span> <span class="st">"firefox"</span>, <span class="at">port =</span> <span class="dv">4569</span>L) <span class="co"># start session</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>remDr <span class="ot">&lt;-</span> rD[[<span class="st">"client"</span>]] <span class="co"># Assign the client to an object</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>remDr<span class="sc">$</span><span class="fu">open</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Connecting to remote server"
-$acceptInsecureCerts
-[1] FALSE
-
-$browserName
-[1] "firefox"
-
-$browserVersion
-[1] "131.0"
-
-$`moz:accessibilityChecks`
-[1] FALSE
-
-$`moz:buildID`
-[1] "20240923135042"
-
-$`moz:geckodriverVersion`
-[1] "0.35.0"
-
-$`moz:headless`
-[1] FALSE
-
-$`moz:platformVersion`
-[1] "23.6.0"
-
-$`moz:processID`
-[1] 48791
-
-$`moz:profile`
-[1] "/var/folders/dc/92b4rct96931sct_xtgblqv00000gn/T/rust_mozprofileg2VPEL"
-
-$`moz:shutdownTimeout`
-[1] 60000
-
-$`moz:webdriverClick`
-[1] TRUE
-
-$`moz:windowless`
-[1] FALSE
-
-$pageLoadStrategy
-[1] "normal"
-
-$platformName
-[1] "mac"
-
-$proxy
-named list()
-
-$setWindowRect
-[1] TRUE
-
-$strictFileInteractability
-[1] FALSE
-
-$timeouts
-$timeouts$implicit
-[1] 0
-
-$timeouts$pageLoad
-[1] 300000
-
-$timeouts$script
-[1] 30000
-
-
-$unhandledPromptBehavior
-[1] "dismiss and notify"
-
-$userAgent
-[1] "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:131.0) Gecko/20100101 Firefox/131.0"
-
-$webdriver.remote.sessionid
-[1] "6d65c50b-10d7-4fe2-8574-23808cbbfea1"
-
-$id
-[1] "6d65c50b-10d7-4fe2-8574-23808cbbfea1"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#web scrape </span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>base_url <span class="ot">&lt;-</span> <span class="st">"https://www.osha.gov/ords/imis/establishment.search?p_logger=1&amp;establishment=&amp;State=CA&amp;officetype=all&amp;Office=950644&amp;sitezip=&amp;p_case=all&amp;p_violations_exist=yes&amp;startmonth=10&amp;startday=03&amp;startyear=2019&amp;endmonth=10&amp;endday=03&amp;endyear=2024"</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>remDr<span class="sc">$</span><span class="fu">navigate</span>(base_url)</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Sys.sleep(4) # seconds</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co">#webElem &lt;- remDr$findElement(using = "css selector", value = "div.table-responsive:nth-child(8) &gt; table:nth-child(1)") </span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># webElem$highlightElement()</span></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>remDr<span class="sc">$</span><span class="fu">maxWindowSize</span>()</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="co">#keep the browser active, open(silent = FALSE)</span></span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="co">#remDr$open() #use this if server is already active</span></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="co">#remDr$close() #close current session </span></span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>source <span class="ot">&lt;-</span> remDr<span class="sc">$</span><span class="fu">getPageSource</span>()[[<span class="dv">1</span>]]<span class="co"># read page source from where you navigated </span></span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="co"># get all rows of table in an xml list </span></span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>table_body  <span class="ot">&lt;-</span> <span class="fu">read_html</span>(source) <span class="sc">%&gt;%</span> <span class="co">#table_body is xml list </span></span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"div.table-responsive:nth-child(8) &gt; table:nth-child(1) &gt; tbody:nth-child(2)"</span>)</span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 1: div.table-responsive:nth-child(8) &gt; table:nth-child(1) - same result as </span></span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 2: div.table-responsive:nth-child(8) </span></span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 3: iv.table-responsive:nth-child(8) &gt; table:nth-child(1) &gt; tbody:nth-child(2) </span></span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a> <span class="co">#Extract all data from table rows</span></span>
-<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>table_data <span class="ot">&lt;-</span> table_body <span class="sc">%&gt;%</span> <span class="co"># then table body is passed to html_nodes to extract </span></span>
-<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"tr"</span>) <span class="sc">%&gt;%</span> <span class="co"># first get all rows (tr) separately </span></span>
-<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"td"</span>) <span class="sc">%&gt;%</span> <span class="co"># then get all cells (td)</span></span>
-<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text2</span>()         <span class="co"># html_text() retrives text from html element</span></span>
-<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(table_data)</span>
-<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(table_data) <span class="co">#length = 240, / by 12 = 20 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 240</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>remDr<span class="sc">$</span><span class="fu">open</span>()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>base_url <span class="ot">&lt;-</span> <span class="st">"https://www.osha.gov/ords/imis/establishment.search?p_logger=1&amp;establishment=&amp;State=CA&amp;officetype=all&amp;Office=950644&amp;sitezip=&amp;p_case=all&amp;p_violations_exist=yes&amp;startmonth=10&amp;startday=14&amp;startyear=2019&amp;endmonth=10&amp;endday=14&amp;endyear=2024"</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>remDr<span class="sc">$</span><span class="fu">navigate</span>(base_url)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Sys.sleep(4) # seconds</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#webElem &lt;- remDr$findElement(using = "css selector", value = "div.table-responsive:nth-child(8) &gt; table:nth-child(1)") </span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># webElem$highlightElement()</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>remDr<span class="sc">$</span><span class="fu">maxWindowSize</span>()</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#keep the browser active, open(silent = FALSE)</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">#remDr$open() #use this if server is already active</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#remDr$close() #close current session </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get column names, turn into list, when transforming into df, the ncol = the list column_length</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>column_names <span class="ot">&lt;-</span> <span class="fu">read_html</span>(source) <span class="sc">%&gt;%</span>  <span class="co"># extract list of column names, convert to text after</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"div.table-responsive:nth-child(8) &gt; table:nth-child(1) &gt; thead:nth-child(1)"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"th"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text2</span>()</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(column_names) <span class="co"># vector of 12 names, just a check</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] " "                  "#"                  "Activity"          
- [4] "Date Opened"        "RID"                "ST"                
- [7] "Type"               "Scope"              "SIC"               
-[10] "NAICS"              "Violations"         "Establishment Name"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>column_length <span class="ot">&lt;-</span> <span class="fu">length</span>(column_names) <span class="co"># length gets/sets the length of a vector(lists)</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(column_length) <span class="co"># 12</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 12</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First turn lists into matrix w correct # of cols then make a tibble </span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">matrix</span>(table_data, <span class="at">ncol =</span> column_length, <span class="at">byrow =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if
-`.name_repair` is omitted as of tibble 2.0.0.
-ℹ Using compatibility `.name_repair`.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df) <span class="ot">&lt;-</span> column_names <span class="co"># ADD PIPE TO DROP ROWS 1:2 </span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co">#str(df) # all chrs, row 1:2 need to drop</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># NOT WORKING RN </span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Navigating to sub pages on the Activtiy # the a elements </span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>a_elements <span class="ot">&lt;-</span> <span class="fu">read_html</span>(remDr<span class="sc">$</span><span class="fu">getPageSource</span>()[[<span class="dv">1</span>]]) <span class="sc">%&gt;%</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"tr"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"td"</span>) <span class="sc">%&gt;%</span> <span class="co">#get a elemtns from the source (html) of the base_url</span></span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_elements</span>(<span class="at">css =</span> <span class="st">"div.package &gt; a"</span>)</span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>a_elements</span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>website_html <span class="ot">&lt;-</span> <span class="st">"https://www.osha.gov/ords/imis/establishment.search?p_logger=1&amp;establishment=&amp;State=CA&amp;officetype=all&amp;Office=950644&amp;sitezip=&amp;p_case=all&amp;p_violations_exist=yes&amp;startmonth=10&amp;startday=03&amp;startyear=2019&amp;endmonth=10&amp;endday=03&amp;endyear=2024"</span> <span class="sc">%&gt;%</span> </span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>()</span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>td_cell_elements <span class="ot">&lt;-</span> source <span class="sc">%&gt;%</span> </span>
-<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"tr"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"td"</span>) </span>
-<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a><span class="co">#bcus a elements (links) are inside the td (cells) i must extract all a tags w/ in the td cells </span></span>
-<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>a_elements <span class="ot">&lt;-</span> td_cell_elements <span class="sc">%&gt;%</span>  </span>
-<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_elements</span>(<span class="st">"a"</span>) <span class="co"># selecting the a elements from the html source - here its from the td_cel_elements html source</span></span>
-<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>a_elements_links <span class="ot">&lt;-</span> a_elements <span class="sc">%&gt;%</span> </span>
-<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_attr</span>(<span class="st">"href"</span>) <span class="co">#gets attribute from html source code </span></span>
-<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>a_element_links</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#working </span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>webElem <span class="ot">&lt;-</span> remDr<span class="sc">$</span><span class="fu">findElement</span>(<span class="at">using =</span> <span class="st">"css selector"</span>,</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">value =</span><span class="st">"tbody tr:nth-child(1) td:nth-child(3)"</span>) <span class="co">#relative css selector </span></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>webElem<span class="sc">$</span><span class="fu">clickElement</span>() </span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.sleep</span>(<span class="dv">2</span>)</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co"># works with relative css selector and absolute css and absolute xpath </span></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>source <span class="ot">&lt;-</span> remDr<span class="sc">$</span><span class="fu">getPageSource</span>()[[<span class="dv">1</span>]] <span class="co"># source() retrieves current HTML of webpage as a list, and [[1]] extracts the first </span></span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>                                     <span class="co"># (and only) item in that list, which is full HTML code as a string</span></span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>table_body2 <span class="ot">&lt;-</span> <span class="fu">read_html</span>(source) <span class="sc">%&gt;%</span> </span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"div.row-fluid:nth-child(9)"</span>) <span class="sc">%&gt;%</span>  <span class="co"># using html nodes to select elements based on their </span></span>
-<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"div.row-fluid:nth-child(11)"</span>) <span class="sc">%&gt;%</span> <span class="co"># html structure/ class attributes, then extracting </span></span>
-<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">".tablei &gt; tbody:nth-child(2) &gt; tr:nth-child(3) &gt; td:nth-child(7)"</span>) <span class="sc">%&gt;%</span> <span class="co"># text or </span></span>
-<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">".tablei &gt; tbody:nth-child(2) &gt; tr:nth-child(5) &gt; td:nth-child(7)"</span>) <span class="sc">%&gt;%</span> <span class="co"># attributes</span></span>
-<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text2</span>() </span>
-<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>table_data2 <span class="ot">&lt;-</span> table_body2 <span class="sc">%&gt;%</span> <span class="co"># then table body is passed to html_nodes to extract </span></span>
-<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"tr"</span>) <span class="sc">%&gt;%</span> <span class="co"># first get all rows (tr) separately </span></span>
-<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"td"</span>) <span class="sc">%&gt;%</span> <span class="co"># then get all cells (td)</span></span>
-<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text2</span>()         <span class="co"># html_text() retrives text from html element</span></span>
-<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(table_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>source <span class="ot">&lt;-</span> remDr<span class="sc">$</span><span class="fu">getPageSource</span>()[[<span class="dv">1</span>]]<span class="co"># read page source from where you navigated </span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># get all rows of table in an xml list </span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>table_body  <span class="ot">&lt;-</span> <span class="fu">read_html</span>(source) <span class="sc">%&gt;%</span> <span class="co">#table_body is xml list </span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"div.table-responsive:nth-child(8) &gt; table:nth-child(1) &gt; tbody:nth-child(2)"</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(table_body)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a> <span class="co">#Extract all data from rows in the table</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>table_data <span class="ot">&lt;-</span> table_body <span class="sc">%&gt;%</span> <span class="co"># then table body is passed to html_nodes to extract the actual data</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"tr"</span>) <span class="sc">%&gt;%</span> <span class="co"># first get all rows (tr, its getting from source code) separately </span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"td"</span>) <span class="sc">%&gt;%</span> <span class="co"># then get all cells (td)</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text2</span>()         <span class="co"># html_text() retrives text from html element</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(table_data)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Get column names, turn into list, when transforming into df, the ncol = the list column_length</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>column_names <span class="ot">&lt;-</span> <span class="fu">read_html</span>(source) <span class="sc">%&gt;%</span>  <span class="co"># extract list of column names, convert to text after using html_text2</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"div.table-responsive:nth-child(8) &gt; table:nth-child(1) &gt; thead:nth-child(1)"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"th"</span>) <span class="sc">%&gt;%</span>  <span class="co"># extracting table headers (th)</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text2</span>()</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(column_names) <span class="co"># vector of 12 names, just a check</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>column_length <span class="ot">&lt;-</span> <span class="fu">length</span>(column_names) <span class="co"># 12, length gets/sets the length of a vector (which is a list)</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="co"># First turn lists into matrix w correct # of cols then make a tibble </span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">matrix</span>(table_data, <span class="at">ncol =</span> column_length, <span class="at">byrow =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df) <span class="ot">&lt;-</span> column_names </span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="co">#str(df) # all chrs </span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="co"># df &lt;- df %&gt;% select(-1, -2)  # remove first two columns, not sure where/ when to run this prolly after </span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>                             <span class="co"># everything is scraped </span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="do">#### Pagination repeat function ####</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="cf">repeat</span> {</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>next_button <span class="ot">&lt;-</span> remDr<span class="sc">$</span><span class="fu">findElement</span>(<span class="at">using =</span> <span class="st">"xpath"</span>, <span class="at">value =</span> <span class="st">'//a[@title = "Next Page"]'</span>) <span class="co"># locate netx button</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>next_button<span class="sc">$</span><span class="fu">clickElement</span>()  <span class="co"># Click next button </span></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.sleep</span>(<span class="dv">2</span>)                <span class="co"># Sleep 3 seconds </span></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(remDr<span class="sc">$</span><span class="fu">findElements</span>(<span class="at">using =</span> <span class="st">"xpath"</span>, <span class="at">value =</span> <span class="st">'//a[@title = "Next Page"]'</span>)) <span class="sc">==</span> <span class="dv">0</span>) { <span class="co"># a check! </span></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>  <span class="cf">break</span></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Appending newly scraped df to all data </span></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>all_data <span class="ot">&lt;-</span> <span class="fu">list</span>() </span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>all_data <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(<span class="fu">list</span>(all_data, df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="do">## DEBUGGING## # alternative approach below, fixed code above was missing html_nodes("th") in order to extract cell</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="do">##               values of the css selector </span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Up to this point 10/7 the data wasnt scraped properly, it is in a long 1 column dataframe </span></span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co">#num_cols &lt;- 12</span></span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="co">#num_rows &lt;- length(table_data)/num_cols</span></span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="co"># matrix_table_data &lt;- matrix(table_data, ncol = num_cols, byrow = TRUE) %&gt;% </span></span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a> <span class="co"># as_tibble()</span></span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="co"># colnames(matrix_table_data) &lt;- column_names</span></span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="co"># there is an issue w the way column names are being extracted, try different css selector, if it fails, try new written</span></span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="co"># vector </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># NOT WORKING RN </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Navigating to sub pages on the Activtiy # the a elements </span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>a_elements <span class="ot">&lt;-</span> <span class="fu">read_html</span>(remDr<span class="sc">$</span><span class="fu">getPageSource</span>()[[<span class="dv">1</span>]]) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"tr"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"td"</span>) <span class="sc">%&gt;%</span> <span class="co"># get a elemtns from the source (html) of the base_url</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_elements</span>(<span class="at">css =</span> <span class="st">"div.package &gt; a"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>a_elements</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>website_html <span class="ot">&lt;-</span> <span class="st">"https://www.osha.gov/ords/imis/establishment.search?p_logger=1&amp;establishment=&amp;State=CA&amp;officetype=all&amp;Office=950644&amp;sitezip=&amp;p_case=all&amp;p_violations_exist=yes&amp;startmonth=10&amp;startday=03&amp;startyear=2019&amp;endmonth=10&amp;endday=03&amp;endyear=2024"</span> <span class="sc">%&gt;%</span> </span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_html</span>()</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>td_cell_elements <span class="ot">&lt;-</span> source <span class="sc">%&gt;%</span> </span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"tr"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"td"</span>) </span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#bcus a elements (links) are inside the td (cells) i must extract all a tags w/ in the td cells </span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>a_elements <span class="ot">&lt;-</span> td_cell_elements <span class="sc">%&gt;%</span>  </span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_elements</span>(<span class="st">"a"</span>) <span class="co"># selecting the a elements from the html source - here its from the td_cel_elements html source</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>a_elements_links <span class="ot">&lt;-</span> a_elements <span class="sc">%&gt;%</span> </span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_attr</span>(<span class="st">"href"</span>) <span class="co">#gets attribute from html source code </span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>a_element_links</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><u>10/10/2000</u></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SCRAPE SUB PAGE working but abandoning </span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>activityElem <span class="ot">&lt;-</span> remDr<span class="sc">$</span><span class="fu">findElement</span>(<span class="at">using =</span> <span class="st">"css selector"</span>, <span class="co"># finds the activity link using </span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">value =</span><span class="st">"tbody tr:nth-child(1) td:nth-child(3)"</span>) <span class="co"># relative css selector </span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>activityElem<span class="sc">$</span><span class="fu">clickElement</span>()  <span class="co">#clicks the activity link </span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.sleep</span>(<span class="dv">2</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>source <span class="ot">&lt;-</span> remDr<span class="sc">$</span><span class="fu">getPageSource</span>()[[<span class="dv">1</span>]] <span class="co"># source() retrieves current HTML of webpage as a list, and [[1]] extracts first  # (and only) item in that list, which is full HTML code as a string</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract paragraphs based on their HTML structure, using single-line selector(no spaces)</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>ptext <span class="ot">&lt;-</span> <span class="fu">read_html</span>(source) <span class="sc">%&gt;%</span>  </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"div.row-fluid:nth-child(9) &gt; div:nth-child(1) &gt; p:nth-child(1), #site address</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="st">              div.row-fluid:nth-child(9) &gt; div:nth-child(2) &gt; p:nth-child(1), # union </span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="st">              div.row-fluid:nth-child(9) &gt; div:nth-child(3) &gt; p:nth-child(2), # NAICS </span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="st">              div.row-fluid:nth-child(11) &gt; div:nth-child(2) &gt; p:nth-child(1),# safety </span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="st">              div.row-fluid:nth-child(11) &gt; div:nth-child(2) &gt; p:nth-child(3)"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text2</span>()</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co"># print(ptext) # Print the extracted text, currently a vector it works! 10/14  </span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Violation Summary Table: getting total current violations and current penalty  </span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>table_body2 <span class="ot">&lt;-</span> <span class="fu">read_html</span>(source) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">".tablei &gt; tbody:nth-child(2) &gt; tr"</span>) <span class="co">#looking at tablei, tbody, nth child 2, all the rows (tr)</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 10/14, it works!!! and its already a function :) must be appended into the larger script </span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>table_data2 <span class="ot">&lt;-</span> table_body2 <span class="sc">%&gt;%</span> </span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_df</span>(<span class="cf">function</span>(.x) { <span class="co"># already looking at all rows (as a string) so .x represents each element of the vector, </span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(         <span class="co"># in this case each .x is a row (tr) element </span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">current_vil =</span> <span class="fu">html_node</span>(.x, <span class="st">"tr:nth-child(3) &gt; td:nth-child(7)"</span>) <span class="sc">%&gt;%</span> <span class="fu">html_text2</span>(), <span class="co"># tbl row 3, cell 7</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">current_pen =</span> <span class="fu">html_node</span>(.x, <span class="st">"tr:nth-child(5) &gt; td:nth-child(7)"</span>) <span class="sc">%&gt;%</span> <span class="fu">html_text2</span>()  <span class="co"># tbl row 5, cell 7</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    )<span class="co"># must tell function to look into .x bcus this searches w/ in specified rows of  table_body2 </span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  }) <span class="co"># instead of excluding it and then telling the function to search the entire document? </span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>     <span class="co"># map_df is superseded meaning it will. not be replaced but there are other syntax recommendations </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1: SETUP </span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>remDr<span class="sc">$</span><span class="fu">open</span>()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>base_url <span class="ot">&lt;-</span> <span class="st">"https://www.osha.gov/ords/imis/establishment.search?p_logger=1&amp;establishment=&amp;State=CA&amp;officetype=all&amp;Office=950644&amp;sitezip=&amp;p_case=all&amp;p_violations_exist=yes&amp;startmonth=10&amp;startday=14&amp;startyear=2019&amp;endmonth=10&amp;endday=14&amp;endyear=2024"</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>remDr<span class="sc">$</span><span class="fu">navigate</span>(base_url)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.sleep</span>(<span class="dv">3</span>) </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>remDr<span class="sc">$</span><span class="fu">maxWindowSize</span>()</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>source <span class="ot">&lt;-</span> remDr<span class="sc">$</span><span class="fu">getPageSource</span>()[[<span class="dv">1</span>]]</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 2: PLUG IN SCRAPE OF INITIAL TABLE </span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 3: get all links for activity # using for loop, navigate and scrape w/ in them</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># FAILED Attempt 2 - neither work :( i am sad. 10/16 update, ending web scraping. </span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>parsed_html <span class="ot">&lt;-</span> <span class="fu">read_html</span>(source)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>links <span class="ot">&lt;-</span> parsed_html <span class="sc">%&gt;%</span> </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"div.table-responsive:nth-child(8) &gt; table:nth-child(1) tbody tr"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"td a"</span>) <span class="sc">%&gt;%</span> <span class="co"># each row has links in &lt;a&gt; tags inside &lt;td&gt;</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_attr</span>(<span class="st">"href"</span>) <span class="co"># Extract href attributes</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(links)</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co"># https://www.osha.gov/ords/imis/establishment.search?p_logger=1&amp;establishment=&amp;State=CA&amp;officetype=all&amp;Office=950644&amp;sitezip=&amp;p_case=all&amp;p_violations_exist=yes&amp;startmonth=10&amp;startday=14&amp;startyear=2019&amp;endmonth=10&amp;endday=14&amp;endyear=2024 </span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co"># https://www.osha.gov/ords/imis/establishment.inspection_detail?id=1763527.015</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co"># FAILED Attempt 1 below</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>rows <span class="ot">&lt;-</span> remDr<span class="sc">$</span><span class="fu">findElements</span>(<span class="at">using =</span> <span class="st">"css selector"</span>, <span class="at">value =</span><span class="st">"div.table-responsive:nth-child(8) table tbody tr"</span>) <span class="co"># rows - find all row elements first, its only getting row 1!!! </span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>links <span class="ot">&lt;-</span> <span class="fu">sapply</span>(rows, <span class="cf">function</span>(row) {   <span class="co"># Getting links: iterate over each row to get links </span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  a_tag <span class="ot">&lt;-</span> row<span class="sc">$</span><span class="fu">findElement</span>(<span class="at">using =</span> <span class="st">"css"</span>, <span class="at">value =</span> <span class="st">"td a"</span>)</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    a_tag<span class="sc">$</span><span class="fu">getElementAttribute</span>(<span class="st">"href"</span>)   <span class="co"># get link itself from &lt;a&gt; (anchor element)</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(links)</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (link <span class="cf">in</span> links){</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>  remDr<span class="sc">$</span><span class="fu">navigate</span>(links) <span class="co"># navigate to the link in vector links</span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">#SCRAPE FUNCTION HERE</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">## DEBUGGING## # alternative approach below, fixed code above was missing html_nodes("th") in order to extract cell</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="do">##               values of the css selector </span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Up to this point 10/7 the data wasnt scraped properly, it is in a long 1 column dataframe </span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#num_cols &lt;- 12</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#num_rows &lt;- length(table_data)/num_cols</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># matrix_table_data &lt;- matrix(table_data, ncol = num_cols, byrow = TRUE) %&gt;% </span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a> <span class="co"># as_tibble()</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># colnames(matrix_table_data) &lt;- column_names</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co"># there is an issue w the way column names are being extracted, try different css selector, if it fails, try new written</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># vector </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>10/ 16</p>
+<ul>
+<li>ending for now. very close to just scraping all pages but not the subpages unfortunately!</li>
+</ul>
+<p>10/15</p>
+<ul>
+<li><p>great progress but on the note of why the function is iterating over the first row 20 times instead of each row once</p>
+<ul>
+<li>This usually happens if the&nbsp;<code>findElement</code>&nbsp;(singular) method is used instead of&nbsp;<code>findElements</code>&nbsp;(plural), or if you’re not properly referencing each individual row during iteration. but I have used plural!! to no avail</li>
+</ul></li>
+</ul>
+<p><u><strong>10/14</strong></u></p>
+<p>CSS selector</p>
+<ul>
+<li></li>
+</ul>
+<p><u>10/10/224</u></p>
 <ul>
 <li><p>do we need the script to create a predefined list for the total activity number? yes i believe</p></li>
 <li><p><strong>To do: Following along with web scrape premier league</strong></p></li>
@@ -727,11 +593,11 @@ $id
 <li>“As you can see, we have an attribute named ‘data-dropdown-list’ whose value is ‘FOOTBALL_COMPSEASON’ and inside we have ‘li’ tags where the attribute ‘data-option-name’ changes for each season.”</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#FOR EXMAPLE:</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>list_seasons <span class="ot">&lt;-</span> <span class="fu">read_html</span>(source) <span class="sc">%&gt;%</span></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"ul[data-dropdown-list=         # find all list (li) items in the ul elements that have attribute [data-dropdown-</span></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="st">             FOOTBALL_COMPSEASON] &gt; li"</span>) <span class="sc">%&gt;%</span> <span class="co"># list=FOOTBALL...] targetting the specific dropdown list for seasons </span></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_attr</span>(<span class="st">"data-option-name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#FOR EXMAPLE:</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>list_seasons <span class="ot">&lt;-</span> <span class="fu">read_html</span>(source) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">"ul[data-dropdown-list=         # find all list (li) items in the ul elements that have attribute [data-dropdown-</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="st">             FOOTBALL_COMPSEASON] &gt; li"</span>) <span class="sc">%&gt;%</span> <span class="co"># list=FOOTBALL...] targetting the specific dropdown list for seasons </span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_attr</span>(<span class="st">"data-option-name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>10/4/24</p>
 <ul>
@@ -809,7 +675,7 @@ remDr$close()</code></pre>
 </section>
 </section>
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

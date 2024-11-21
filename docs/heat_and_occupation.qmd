@@ -427,7 +427,7 @@ get_places <- function(api_key, location, radius = 25000, type = "restaurant") {
 }
 #defined a function above to query the API
 
-api_key <- "AIzaSyDxCIOyFiUyQyPDMkoSfJntu_JQPhGPLOI"
+api_key <- "MY API KEY"
 la_center_cooridnate <- "34.0522,-118.2437" # negative for west i believe 
 radius <- 25000 #25000 km  #25 km ~ 15 mi 
 
